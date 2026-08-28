@@ -152,6 +152,18 @@ code {
   text-align: left;
 }
 
+.resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 20px 0 32px;
+}
+
+.transacoes-lista {
+  padding: 0;
+  margin: 12px 0 0;
+}
+
 .resumo-card {
   border: 1px solid var(--border);
   border-radius: 8px;

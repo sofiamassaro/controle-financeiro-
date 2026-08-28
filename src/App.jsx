@@ -19,7 +19,10 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route path="/" element={<Inicio transacoes={transacoes} />} />
+          <Route
+            path="/"
+            element={<Inicio transacoes={transacoes} onExcluir={excluirTransacao} />}
+          />
           <Route
             path="/transacoes"
             element={<Transacoes transacoes={transacoes} onExcluir={excluirTransacao} />}
