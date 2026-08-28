@@ -151,3 +151,84 @@ code {
   padding: 32px 24px;
   text-align: left;
 }
+
+.resumo-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.resumo-card-titulo {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.resumo-card-valor {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin-top: 4px;
+}
+
+.resumo-card--receita .resumo-card-valor {
+  color: #16a34a;
+}
+
+.resumo-card--despesa .resumo-card-valor {
+  color: #dc2626;
+}
+
+.transacao-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  list-style: none;
+}
+
+.transacao-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transacao-descricao {
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+.transacao-detalhes {
+  font-size: 13px;
+}
+
+.transacao-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transacao-item--receita .transacao-valor {
+  color: #16a34a;
+}
+
+.transacao-item--despesa .transacao-valor {
+  color: #dc2626;
+}
+
+.transacao-acoes button {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.transacao-acoes button:hover {
+  color: #dc2626;
+  background: var(--accent-bg);
+}
