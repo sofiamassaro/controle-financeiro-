@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Home, ArrowLeftRight, Info } from 'lucide-react'
+import { Home, ArrowLeftRight, PlusCircle, Info } from 'lucide-react'
 
 // className vem de uma função pois o NavLink precisa saber se o link está ativo
 function classeLink({ isActive }) {
@@ -18,6 +18,10 @@ function Navbar() {
         <NavLink to="/transacoes" className={classeLink}>
           <ArrowLeftRight size={18} />
           Transações
+        </NavLink>
+        <NavLink to="/nova" className={classeLink}>
+          <PlusCircle size={18} />
+          Nova Transação
         </NavLink>
         <NavLink to="/sobre" className={classeLink}>
           <Info size={18} />
