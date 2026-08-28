@@ -30,13 +30,6 @@ npm run dev
 
 A aplicação fica disponível em `http://localhost:5173`.
 
-Outros comandos:
-
-```bash
-npm run build   # build de produção
-npm run lint    # checagem de lint
-```
-
 ## Estrutura do projeto
 
 ```
