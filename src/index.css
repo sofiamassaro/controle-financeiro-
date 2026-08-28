@@ -109,3 +109,45 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-marca {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 8px;
+}
+
+.navbar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  background: var(--accent-bg);
+}
+
+.navbar-link.ativo {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.pagina {
+  padding: 32px 24px;
+  text-align: left;
+}
