@@ -16,13 +16,20 @@ usuário a enxergar para onde vai o seu dinheiro.
 ## Contexto acadêmico (importante)
 
 Trabalho da disciplina de Desenvolvimento Front-End II (ADS), com avaliação
-incremental em três sprints. **A entrega atual é a Sprint 1 (N1).** Mantenha o
-escopo da Sprint 1 — não implemente ainda recursos das sprints seguintes.
+incremental em três sprints. **Projeto individual.** A Sprint 1 (N1) foi
+entregue; **a entrega atual é a Sprint 2 (N2).** Mantenha o escopo da Sprint 2:
+não implemente ainda recursos da Sprint 3.
 
-O que a Sprint 1 valoriza na nota: aplicação React com Vite rodando no
-navegador, componentes/estado/eventos demonstráveis, e navegação com pelo menos
-3 páginas. O código precisa ser legível e explicável (o professor faz perguntas
-sobre qualquer parte).
+O que a Sprint 2 exige: formulário controlado com `useState` (mínimo 3 campos),
+listagem dinâmica dos itens cadastrados, persistência com `localStorage` (os
+dados permanecem após recarregar), componentes `.jsx` com responsabilidades
+claras, lógica de negócio em `src/services/` e README que permita clonar, rodar
+`npm install` e `npm run dev` sem erros. O app não pode ter erros no console.
+
+O código precisa ser legível e explicável: o professor faz perguntas sobre
+qualquer parte, incluindo as alternativas consideradas.
+
+Não utilize emojis nos comentários 
 
 ## Stack
 
@@ -42,11 +49,18 @@ sobre qualquer parte).
 - Componentes funcionais, um por arquivo `.jsx`.
 - Nomes descritivos: `TransacaoItem.jsx`, não `Item.jsx`.
 - Comentários curtos em português explicando o "porquê" das decisões.
-- Separe lógica de apresentação: cálculos e formatação ficam em `utils/`, fora
-  dos componentes visuais.
+- Separe lógica de apresentação:
+  - `services/` guarda as regras do domínio (cálculo de totais e saldo) e o
+    acesso ao `localStorage`. Componentes nunca chamam `localStorage` direto.
+  - `utils/` guarda formatação genérica (moeda, data).
 - Props bem definidas; evite props drilling desnecessário. O estado principal
   vive no `App.jsx` (fonte única) e desce por props.
-- **Não usar `localStorage` (isso é Sprint 2) nem chamadas a API (Sprint 3).**
+- Operações que podem falhar (como ler o `localStorage`) usam `try/catch` e
+  nunca derrubam a aplicação; erros de validação do formulário aparecem para o
+  usuário com mensagens claras.
+- **Não usar chamadas a API (isso é Sprint 3).**
+- Commits pequenos, um por passo, no padrão `tipo: descrição` (`feat`, `fix`,
+  `refactor`, `style`, `docs`, `chore`).
 
 ## Estrutura alvo
 
@@ -55,15 +69,20 @@ src/
 ├── components/
 │   ├── Navbar.jsx         Menu de navegação
 │   ├── ResumoCard.jsx     Card de resumo (saldo/receitas/despesas)
+│   ├── TransacaoForm.jsx  Formulário controlado de cadastro
 │   └── TransacaoItem.jsx  Linha de uma transação
 ├── pages/
 │   ├── Inicio.jsx         Painel com o resumo financeiro
 │   ├── Transacoes.jsx     Lista com filtro e busca
+│   ├── NovaTransacao.jsx  Página de cadastro (usa TransacaoForm)
 │   └── Sobre.jsx          Informações do projeto
+├── services/
+│   ├── transacoesStorage.js  Leitura e gravação no localStorage
+│   └── financeiro.js         Cálculo de receitas, despesas e saldo
 ├── data/
-│   └── transacoesIniciais.js
+│   └── transacoesIniciais.js  Exemplos usados no primeiro acesso
 ├── utils/
-│   └── formato.js         Formatação de moeda (R$)
+│   └── formato.js         Formatação de moeda (R$) e data
 ├── App.jsx                Estado principal + rotas
 ├── main.jsx               Ponto de entrada (BrowserRouter)
 └── index.css              Estilos
@@ -82,33 +101,38 @@ tipo é quem define se soma ou subtrai).
 
 ## Escopo por sprint
 
-- **Sprint 1 (atual):** componentes, estado (`useState`), eventos (`onClick`,
-  `onChange`), navegação entre 3 páginas, cálculo de saldo, filtro, busca e
-  exclusão de transações (tudo em memória).
-- **Sprint 2 (depois):** formulário controlado para cadastrar transações e
+- **Sprint 1 (entregue):** componentes, estado (`useState`), eventos
+  (`onClick`, `onChange`), navegação entre páginas, cálculo de saldo, filtro,
+  busca e exclusão de transações (em memória).
+- **Sprint 2 (atual):** formulário controlado para cadastrar transações e
   persistência com `localStorage`.
 - **Sprint 3 (depois):** consumo de API RESTful com CRUD completo.
 
-## Plano de construção da Sprint 1
+## Plano de construção da Sprint 2
 
 Fazer **um passo por vez** e commitar depois de cada, com mensagem clara.
 
-1. **Navegação e layout base:** `BrowserRouter` no `main.jsx`; no `App.jsx`,
-   rotas para `/` (Início), `/transacoes` (Transações) e `/sobre` (Sobre),
-   com o `Navbar` acima. `Navbar.jsx`: menu com `NavLink` marcando a página
-   ativa e ícones do lucide-react.
-2. **Estado das transações:** `useState` no `App.jsx` com a lista inicial;
-   função `excluirTransacao(id)`; passar `transacoes` e `onExcluir` por props.
-3. **Dados, utilitário e componentes de exibição:** `data/transacoesIniciais.js`
-   (cerca de 6 exemplos, receitas e despesas); `utils/formato.js` com
-   `formatarMoeda`; `ResumoCard.jsx` (apresentacional) e `TransacaoItem.jsx`
-   (recebe a transação e `onExcluir` por props).
-4. **Página Início:** calcular total de receitas, total de despesas e saldo a
-   partir das transações; exibir três `ResumoCard` e uma prévia das últimas.
-5. **Página Transações:** estado local de filtro (todas/receita/despesa) e de
-   busca; chips com `onClick` e input com `onChange`; listar `TransacaoItem`
-   filtrados; exclusão via `onExcluir`; mensagem de estado vazio.
-6. **Página Sobre, estilos e README:** conteúdo da Sobre (problema,
-   tecnologias, equipe), `index.css` limpo e `README.md` com instruções.
+1. **Contexto:** atualizar este arquivo para a Sprint 2.
+2. **Service de armazenamento:** `services/transacoesStorage.js` com
+   `carregarTransacoes(padrao)` e `salvarTransacoes(transacoes)`. A leitura usa
+   `try/catch`; `null` (nada salvo) é diferente de `[]` (usuário excluiu tudo).
+3. **Persistência no App:** `useState` com inicialização preguiçosa a partir do
+   storage, `useEffect` que salva a cada mudança e função
+   `adicionarTransacao(transacao)`.
+4. **Service financeiro:** `services/financeiro.js` com
+   `calcularResumo(transacoes)`; `Inicio.jsx` só exibe o resultado.
+5. **Formulário:** `TransacaoForm.jsx` controlado (descrição, valor, tipo,
+   categoria, data), com validação, conversão do valor com `Number()` e
+   mensagens de erro.
+6. **Página Nova Transação:** usa o formulário, chama `onAdicionar` e leva para
+   `/transacoes` após salvar.
+7. **Usabilidade:** data em formato brasileiro, menu responsivo no celular,
+   `index.html` em pt-BR e confirmação antes de excluir.
+8. **Dependências:** `npm audit fix`.
+9. **Documentação:** README e página Sobre atualizados para a Sprint 2, com
+   autoria individual.
+10. **Validação final:** clone limpo, `npm install`, `npm run dev`, console sem
+    erros, cadastro persistindo após recarregar, exclusão total persistindo e
+    `localStorage` corrompido sem derrubar o app.
 
 Depois de cada passo, revisar o diff, testar no navegador e commitar.
